@@ -94,7 +94,8 @@ def create_single_data(mesh_filaname):
     # voxel
     if not os.path.exists(mesh_filaname.replace('_remesh.obj', '_normalized.binvox')):
         if platform == "linux" or platform == "linux2":
-            os.system("./binvox -d 88 -pb " + mesh_filaname.replace("_remesh.obj", "_normalized.obj"))
+            #os.system("./binvox -d 88 -pb &" + mesh_filaname.replace("_remesh.obj", "_normalized.obj"))
+            os.system("./binvox -d 88 " + mesh_filaname.replace("_remesh.obj", "_normalized.obj"))
         elif platform == "win32":
             os.system("binvox.exe -d 88 " + mesh_filaname.replace("_remesh.obj", "_normalized.obj"))
         else:
@@ -387,26 +388,26 @@ if __name__ == '__main__':
     jointNet = JOINTNET()
     jointNet.to(device)
     jointNet.eval()
-    jointNet_checkpoint = torch.load('checkpoints/gcn_meanshift/model_best.pth.tar')
+    jointNet_checkpoint = torch.load('checkpoints/gcn_meanshift/model_best.pth.tar',map_location=torch.device("cpu"))
     jointNet.load_state_dict(jointNet_checkpoint['state_dict'])
     print("     joint prediction network loaded.")
 
     rootNet = ROOTNET()
     rootNet.to(device)
     rootNet.eval()
-    rootNet_checkpoint = torch.load('checkpoints/rootnet/model_best.pth.tar')
+    rootNet_checkpoint = torch.load('checkpoints/rootnet/model_best.pth.tar',map_location=torch.device("cpu"))
     rootNet.load_state_dict(rootNet_checkpoint['state_dict'])
     print("     root prediction network loaded.")
 
     boneNet = BONENET()
     boneNet.to(device)
     boneNet.eval()
-    boneNet_checkpoint = torch.load('checkpoints/bonenet/model_best.pth.tar')
+    boneNet_checkpoint = torch.load('checkpoints/bonenet/model_best.pth.tar',map_location=torch.device("cpu"))
     boneNet.load_state_dict(boneNet_checkpoint['state_dict'])
     print("     connection prediction network loaded.")
 
     skinNet = SKINNET(nearest_bone=5, use_Dg=True, use_Lf=True)
-    skinNet_checkpoint = torch.load('checkpoints/skinnet/model_best.pth.tar')
+    skinNet_checkpoint = torch.load('checkpoints/skinnet/model_best.pth.tar',map_location=torch.device("cpu"))
     skinNet.load_state_dict(skinNet_checkpoint['state_dict'])
     skinNet.to(device)
     skinNet.eval()
