@@ -59,6 +59,7 @@ def create_single_data(mesh_filaname):
     :return: wrapped data, voxelized mesh, and geodesic distance matrix of all vertices
     """
     mesh = o3d.io.read_triangle_mesh(mesh_filaname)
+    mesh.compute_vertex_normals()
     mesh.compute_triangle_normals()
     mesh_v = np.asarray(mesh.vertices)
     mesh_vn = np.asarray(mesh.vertex_normals)
@@ -388,26 +389,26 @@ if __name__ == '__main__':
     jointNet = JOINTNET()
     jointNet.to(device)
     jointNet.eval()
-    jointNet_checkpoint = torch.load('checkpoints/gcn_meanshift/model_best.pth.tar',map_location=torch.device("cpu"))
+    jointNet_checkpoint = torch.load('checkpoints/gcn_meanshift/model_best.pth.tar')
     jointNet.load_state_dict(jointNet_checkpoint['state_dict'])
     print("     joint prediction network loaded.")
 
     rootNet = ROOTNET()
     rootNet.to(device)
     rootNet.eval()
-    rootNet_checkpoint = torch.load('checkpoints/rootnet/model_best.pth.tar',map_location=torch.device("cpu"))
+    rootNet_checkpoint = torch.load('checkpoints/rootnet/model_best.pth.tar')
     rootNet.load_state_dict(rootNet_checkpoint['state_dict'])
     print("     root prediction network loaded.")
 
     boneNet = BONENET()
     boneNet.to(device)
     boneNet.eval()
-    boneNet_checkpoint = torch.load('checkpoints/bonenet/model_best.pth.tar',map_location=torch.device("cpu"))
+    boneNet_checkpoint = torch.load('checkpoints/bonenet/model_best.pth.tar')
     boneNet.load_state_dict(boneNet_checkpoint['state_dict'])
     print("     connection prediction network loaded.")
 
     skinNet = SKINNET(nearest_bone=5, use_Dg=True, use_Lf=True)
-    skinNet_checkpoint = torch.load('checkpoints/skinnet/model_best.pth.tar',map_location=torch.device("cpu"))
+    skinNet_checkpoint = torch.load('checkpoints/skinnet/model_best.pth.tar')
     skinNet.load_state_dict(skinNet_checkpoint['state_dict'])
     skinNet.to(device)
     skinNet.eval()
@@ -418,8 +419,8 @@ if __name__ == '__main__':
     # We also use these two default parameters for processing all test models in batch.
 
     #model_id, bandwidth, threshold = "smith", None, 1e-5
-    model_id, bandwidth, threshold = "17872", 0.045, 0.75e-5
-    #model_id, bandwidth, threshold = "8210", 0.05, 1e-5
+    model_id, bandwidth, threshold = "cow", 0.03, 0.5e-5
+    # model_id, bandwidth, threshold = "8210", 0.05, 1e-5
     #model_id, bandwidth, threshold = "8330", 0.05, 0.8e-5
     #model_id, bandwidth, threshold = "9477", 0.043, 2.5e-5
     #model_id, bandwidth, threshold = "17364", 0.058, 0.3e-5

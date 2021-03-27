@@ -1,0 +1,38 @@
+joints root 0.00000000 -11.42795944 1.30453670
+joints root_dup_0 0.16463056 -11.26332855 1.46916723
+joints root_dup_1 0.29090148 -11.13705730 1.59543812
+joints root_dup_2 0.24570197 -11.18225765 1.55023873
+joints root_dup_3 0.16463056 -11.26332855 1.46916723
+joints joint_3 -2.75492072 -16.16072083 1.65960336
+joints joint_6 0.00000000 -1.73145294 1.36825240
+joints joint_7 0.00000000 -8.85986423 -6.47248459
+joints joint_11 2.75492072 -16.16072083 1.65960336
+joints joint_2 -4.16546965 -15.16613674 5.28258419
+joints joint_6_dup_0 0.21585351 -1.51560020 1.58410597
+joints joint_6_dup_1 0.25010788 -1.48134613 1.61836028
+joints joint_6_dup_2 0.21585351 -1.51560020 1.58410597
+joints joint_10 4.16546965 -15.16613674 5.28258419
+joints joint_1 -7.14368916 -1.52709579 0.53419572
+joints joint_4 0.00000000 6.60547638 1.36635542
+joints joint_9 7.14368916 -1.52709579 0.53419572
+joints joint_0 -13.25572872 1.94588852 0.74253851
+joints joint_8 13.25572872 1.94588852 0.74253851
+root root
+hier root root_dup_0
+hier root root_dup_1
+hier root root_dup_2
+hier root root_dup_3
+hier root_dup_0 joint_3
+hier root_dup_1 joint_6
+hier root_dup_2 joint_7
+hier root_dup_3 joint_11
+hier joint_3 joint_2
+hier joint_6 joint_6_dup_0
+hier joint_6 joint_6_dup_1
+hier joint_6 joint_6_dup_2
+hier joint_11 joint_10
+hier joint_6_dup_0 joint_1
+hier joint_6_dup_1 joint_4
+hier joint_6_dup_2 joint_9
+hier joint_1 joint_0
+hier joint_9 joint_8
